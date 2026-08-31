@@ -1,5 +1,10 @@
 # Proyek Pemrograman Web - OBE
 
+# Identitas Mahasiswa 
+- Nama : Muhammad Rizal
+- NPM : 2440304024
+- Prodi : Teknik Komputer
+
 ## Identitas Mata Kuliah
 - Mata Kuliah: Pemrograman Web
 - Semester: 5
