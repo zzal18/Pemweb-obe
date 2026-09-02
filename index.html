@@ -5,10 +5,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Uji Pemrograman Web</title>
 </head>
+
 <body>
 
-    <h1>Praktikum Pemrograman web</h1>
-    <p>Selamat datang di website saya.</p>
+    <header>
+        <h1>Praktikum Pemrograman web</h1>
 
+        <nav aria-label="Navigasi Utama">
+            <a href="Beranda">Beranda</a>
+            <a href="Tentang">Tentang</a>
+            <a href="Kontak">Kontak</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section id="Beranda">
+            <h2>
+                Selamat datang di Website Saya
+            </h2>
+        
+            <img src="Images/ce_ubt-removebg-preview.png" alt="Logo Prodi Teknik Komputer" width="150">
+
+        </section>
+
+        <section id="Tentang">
+            <h3>
+                Tentang Kami
+            </h3>
+        
+            <article>
+                Web ini dibuat untuk memenuhi tugas praktikum mata kuliah Pemrograman Web,
+                Prodi Teknik Komputer Fakultas Teknik Universitas Borneo Tarakan
+            </article>
+        </section>
+
+        <section id="Kontak">
+             <h2>Hubungi Kami</h2>
+
+            <form action="#" method="post">
+
+                <p>
+                    <label for="nama">Nama:</label><br>
+                    <input
+                        type="text"
+                        id="nama"
+                        name="nama"
+                        required
+                    >
+                </p>
+
+                <p>
+                    <label for="email">Email:</label><br>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        required
+                    >
+                </p>
+
+                <p>
+                    <label for="pesan">Pesan:</label><br>
+                    <textarea
+                        id="pesan"
+                        name="pesan"
+                        rows="5"
+                        cols="40"
+                        required
+                    ></textarea>
+                </p>
+
+                <button type="submit">Kirim Pesan</button>
+
+            </form>
+
+        </section>
+
+    </main>
+    <footer>
+        <p>
+            &copy; 2026 Pemweb-OBE. Teknik Komputer.
+        </p>
+    </footer>
 </body>
 </html>
