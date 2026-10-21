@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch API</title>
+    <style>
+    body { font-family: system-ui, sans-serif; max-width: 640px; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; }
+    #api-message { padding: .5rem .75rem; border-left: 4px solid #888; background: #f3f3f3; }
+    #api-message.error { border-color: #c0392b; background: #fdecea; }
+    #api-message.success { border-color: #1e8449; background: #eafaf1; }
+    </style>
+</head>
+<body>
+    <h1>Daftar Pengguna (Fetch API)</h1>
+    <p id="api-message" role="status" aria-live="polite">Memuat data...</p>
+    <ul id="api-output"></ul>
+
+    <script src="Js/data.js"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+    "name": "zal/pemweb-obe",
+    "description": "Backend REST API Pemweb OBE",
+    "license": "proprietary",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Muhammad Rizal",
+            "email": "muhammadrzal2006@gmail.com"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.7"
+    }
+}

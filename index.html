@@ -4,46 +4,134 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Uji Pemrograman Web</title>
-    
+
     <link rel="stylesheet" href="css/stylesheet.css">
+    <script type="module" src="js/app.js"></script>
+    <script type="module" src="Js/data.js"></script>
 </head>
 
 <body>
 
-    <header>
-        <h1>Praktikum Pemrograman web</h1>
+    <header class="container">
+        <h1>Praktikum Pemrograman Web</h1>
 
         <nav aria-label="Navigasi Utama">
-            <a href="Beranda">Beranda</a>
-            <a href="Tentang">Tentang</a>
-            <a href="Kontak">Kontak</a>
+            <a href="#Beranda">Beranda</a>
+            <a href="#Tentang">Tentang</a>
+            <a href="#Data">Data</a>
+            <a href="#Latihan">Latihan</a>
+            <a href="#Kontak">Kontak</a>
+            <button id="theme-button" type="button" class="button">Ganti Tema</button>
         </nav>
     </header>
 
-    <main>
+    <main class="container">
 
-        <section id="Beranda">
-            <h2>
-                Selamat datang di Website Saya
-            </h2>
-        
-            <img src="Images/ce_ubt-removebg-preview.png" alt="Logo Prodi Teknik Komputer" width="150">
+        <section id="Beranda" class="hero">
+            <h2>Selamat datang di Website Saya</h2>
 
+            <img src="Images/ce_ubt-removebg-preview.png" alt="Logo Prodi Teknik Komputer" width="300">
         </section>
 
         <section id="Tentang">
-            <h3>
-                Tentang Kami
-            </h3>
-        
-            <article>
-                Web ini dibuat untuk memenuhi tugas praktikum mata kuliah Pemrograman Web,
-                Prodi Teknik Komputer Fakultas Teknik Universitas Borneo Tarakan
-            </article>
+            <h2>Tentang Kami</h2>
+
+            <ul class="cards">
+                <li class="card">
+                    Web ini dibuat untuk memenuhi tugas praktikum mata kuliah Pemrograman Web,
+                    Prodi Teknik Komputer Fakultas Teknik Universitas Borneo Tarakan.
+                </li>
+            </ul>
+        </section>
+
+        <section id="Data">
+            <h2>Data Inventaris</h2>
+
+            <ul class="cards">
+                <li class="card">
+                    <h3>Ringkasan</h3>
+                    <ul id="ringkasan-inventaris"></ul>
+                </li>
+
+                <li class="card">
+                    <h3>Nama Alat</h3>
+                    <ul id="daftar-nama-alat"></ul>
+                </li>
+            </ul>
+
+            <h3>Daftar Alat Interaktif</h3>
+
+            <fieldset class="filter-group">
+                <legend>Filter Kondisi</legend>
+                <button type="button" data-filter="Semua" class="active">Semua</button>
+                <button type="button" data-filter="Baik">Baik</button>
+                <button type="button" data-filter="Perlu Cek">Perlu Cek</button>
+            </fieldset>
+        <p>
+            <label for="cari-alat">Cari Alat:</label><br>
+            <input type="search" id="cari-alat" placeholder="Cari nama alat...">
+        </p>
+
+        <p>
+            <label for="per-halaman">Item per halaman:</label><br>
+            <select id="per-halaman">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+            </select>
+        </p>
+
+        <p id="status-info" class="status"></p>
+
+        <ul id="daftar-alat" class="cards"></ul>
+
+            <h3>Data Pengguna (REST API)</h3>
+
+            <!-- LATIHAN 2: kolom pencarian (filter tanpa request baru) -->
+            <p>
+                <label for="search">Cari nama atau email:</label><br>
+                <input type="search" id="search" placeholder="Ketik untuk memfilter..." autocomplete="off" disabled>
+            </p>
+
+            <p id="api-message" class="status" role="status" aria-live="polite">Memuat data...</p>
+            <!-- = LATIHAN 1: tombol retry saat request gagal  -->
+            <button type="button" id="retry-btn" class="button" hidden>Coba lagi</button>
+            <ul id="api-output"></ul>
+
+        </section>
+
+        <section id="Latihan">
+            <h2>Latihan</h2>
+
+            <ul class="cards">
+                <li class="card">
+                    <h3>Alat di Lab Jaringan</h3>
+                    <ul id="alat-lokasi"></ul>
+                </li>
+
+                <li class="card">
+                    <h3 id="judul-alat-dicari">Cari Alat</h3>
+                    <p id="alat-dicari"></p>
+                </li>
+
+                <li class="card">
+                    <h3>Ringkasan per Alat</h3>
+                    <ul id="ringkasan-per-alat"></ul>
+                </li>
+
+                <!--  LATIHAN 3: contoh body JSON POST + Content-Type -->
+                <li class="card">
+                    <h3>Contoh POST (JSON)</h3>
+                    <pre id="post-body"></pre>
+                    <button type="button" id="post-btn" class="button">Kirim contoh POST</button>
+                    <p id="post-message" class="status" role="status" aria-live="polite"></p>
+                    <pre id="post-response" hidden></pre>
+                </li>
+            </ul>
         </section>
 
         <section id="Kontak">
-             <h2>Hubungi Kami</h2>
+            <h2>Hubungi Kami</h2>
 
             <form action="#" method="post">
 
@@ -78,17 +166,16 @@
                     ></textarea>
                 </p>
 
-                <button type="submit">Kirim Pesan</button>
+                <button type="submit" class="button">Kirim Pesan</button>
 
             </form>
 
         </section>
 
     </main>
-    <footer>
-        <p>
-            &copy; 2026 Pemweb-OBE. Teknik Komputer.
-        </p>
+
+    <footer class="container">
+        <p>&copy; 2026 Pemweb-OBE. Teknik Komputer.</p>
     </footer>
 </body>
 </html>

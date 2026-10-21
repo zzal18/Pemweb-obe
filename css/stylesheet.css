@@ -1,0 +1,165 @@
+:root {
+  --brand: #4f46e5;
+  --text: #1f2937;
+  --space-1: .5rem;
+  --space-2: 1rem;
+  --radius: .75rem;
+  --bg: #ffffff;
+  --card-bg: #ffffff;
+}
+
+html[data-theme="dark"] {
+  --brand: #818cf8;
+  --text: #e5e7eb;
+  --bg: #111827;
+  --card-bg: #1f2937;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+  transition: background .2s, color .2s;
+}
+
+.container {
+  width: min(100% - 2rem, 72rem);
+  margin-inline: auto;
+}
+
+header {
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid #ddd;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+nav div {
+  display: flex;
+  gap: 1rem;
+}
+
+.button {
+  display: inline-block;
+  background: var(--brand);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  padding: var(--space-1) var(--space-2);
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.button:hover {
+  opacity: .9;
+}
+
+.filter-group {
+  border: none;
+  padding: 0;
+  margin: 0 0 1rem;
+}
+
+.filter-group legend {
+  font-weight: 600;
+  padding: 0;
+  margin-bottom: .5rem;
+}
+
+.filter-group button {
+  border: 1px solid #ddd;
+  background: var(--card-bg);
+  color: var(--text);
+  padding: .35rem .75rem;
+  border-radius: .5rem;
+  cursor: pointer;
+  margin-right: .3rem;
+}
+
+.filter-group button.active {
+  background: var(--brand);
+  color: #fff;
+  border-color: var(--brand);
+}
+
+#cari-alat, #per-halaman {
+  padding: .35rem .6rem;
+  border-radius: .5rem;
+  border: 1px solid #ddd;
+  background: var(--card-bg);
+  color: var(--text);
+}
+
+.status {
+  font-size: .9rem;
+  opacity: .75;
+}
+
+#daftar-alat .card button {
+  margin-top: .5rem;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-block: 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: .75rem;
+  background: var(--card-bg);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  padding: 24px;
+  width: 100%;
+  align-items: center;
+}
+
+.hero h1,
+.hero h2 {
+  font-size: clamp(2rem, 5vw, 4rem);
+}
+
+footer {
+  padding: var(--space-2) 0;
+  margin-top: 2rem;
+  border-top: 1px solid #ddd;
+  text-align: center;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid #111;
+  outline-offset: 3px;
+}
+
+@media (min-width: 48rem) {
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .hero {
+    grid-template-columns: 1.3fr 1fr;
+  }
+}
