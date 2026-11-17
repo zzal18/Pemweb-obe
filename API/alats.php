@@ -168,7 +168,6 @@ try {
                 throw new ApiException(404, 'NOT_FOUND', 'Data alat tidak ditemukan');
             }
             $input = readJsonBody();
-            // PUT = ganti penuh; PATCH = gabungkan dengan data lama
             $merged = $method === 'PATCH' ? array_merge($existing, $input) : $input;
             $data   = validateAlat($merged);
             $data['id'] = $id;
@@ -187,7 +186,7 @@ try {
                 throw new ApiException(400, 'INVALID_ID', 'Parameter id wajib diisi');
             }
             if (findAlat($pdo, $id) === null) {
-                throw new ApiException(404, 'NOT_FOUND', 'Data alat tidak ditemukan');
+                throw new ApiException(404, 'NOT_FOUND', 'Data alat tidak ditemukan');  
             }
             try {
                 $stmt = $pdo->prepare('DELETE FROM alat WHERE id = :id');
@@ -209,7 +208,6 @@ try {
 } catch (ApiException $e) {
     sendError($e->status, $e->errorCode, $e->getMessage(), $e->fields);
 } catch (Throwable $e) {
-    // Detail internal hanya ke log server, client menerima pesan generik.
     error_log('[alats] ' . get_class($e) . ': ' . $e->getMessage());
     sendError(500, 'INTERNAL_ERROR', 'Terjadi kesalahan pada server');
 }
