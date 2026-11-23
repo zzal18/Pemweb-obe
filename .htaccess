@@ -1,0 +1,16 @@
+# Modul 13 - hardening dasar (Apache / Laragon)
+Options -Indexes
+
+# Blokir .git, .env, dan file dot lainnya
+RedirectMatch 404 "/\.(?!well-known)"
+
+# Blokir file konfigurasi, dependency, dokumentasi, dan data uji
+<FilesMatch "(\.(sql|md|lock|log|ini|bak)$|^composer\.json$|^(post|put|patch)\.json$)">
+    Require all denied
+</FilesMatch>
+
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "DENY"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>

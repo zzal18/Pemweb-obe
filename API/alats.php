@@ -3,6 +3,7 @@ declare(strict_types=1);
 header('Content-Type: application/json; charset=utf-8');
 
 require_once __DIR__ . '/middleware.php';
+require_once __DIR__ . '/auth.php';
 
 const KONDISI_VALID = ['Baik', 'Perlu Cek', 'Rusak'];
 
@@ -78,14 +79,23 @@ function normalizeRow(array $row): array
 }
 
 try {
+    startSecureSession();
+    requireLogin();   // semua method wajib login (anonymous -> 401)
+
     require_once dirname(__DIR__) . '/config/database.php';
     $pdo    = db();
     $method = $_SERVER['REQUEST_METHOD'];
     $id     = readId();
 
+    // CSRF: semua request pengubah state (cookie session otomatis terkirim browser)
+    if (in_array($method, ['POST', 'PUT', 'PATCH', 'DELETE'], true)) {
+        requireCsrf();
+    }
+
     switch ($method) {
         // ---------- READ ----------
         case 'GET':
+            requireRole(['admin', 'petugas', 'viewer']);
             if ($id !== null) {
                 $row = findAlat($pdo, $id);
                 if ($row === null) {
@@ -143,6 +153,7 @@ try {
 
         // ---------- CREATE ----------
         case 'POST':
+            requireRole(['admin', 'petugas']);
             if ($id !== null) {
                 throw new ApiException(400, 'INVALID_REQUEST', 'POST tidak menerima parameter id');
             }
@@ -160,6 +171,7 @@ try {
         // ---------- UPDATE ----------
         case 'PUT':
         case 'PATCH':
+            requireRole(['admin', 'petugas']);
             if ($id === null) {
                 throw new ApiException(400, 'INVALID_ID', 'Parameter id wajib diisi');
             }
@@ -182,6 +194,7 @@ try {
 
         // ---------- DELETE ----------
         case 'DELETE':
+            requireRole(['admin']);
             if ($id === null) {
                 throw new ApiException(400, 'INVALID_ID', 'Parameter id wajib diisi');
             }

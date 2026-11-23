@@ -44,13 +44,24 @@ class ApiError extends Error {
   }
 }
 
+// Token CSRF diambil dari server (session login), lalu dikirim lewat header pada request pengubah state.
+let csrfToken = null;
+async function getCsrfToken() {
+  if (csrfToken) return csrfToken;
+  const res = await fetch('API/csrf.php', { headers: { Accept: 'application/json' } });
+  if (!res.ok) throw new ApiError(res.status, 'Sesi tidak valid, silakan login ulang.');
+  csrfToken = (await res.json()).data.csrf_token;
+  return csrfToken;
+}
+
 async function request(url, options = {}) {
   let response;
+  const headers = { Accept: 'application/json', ...(options.headers ?? {}) };
+  if ((options.method ?? 'GET').toUpperCase() !== 'GET') {
+    headers['X-CSRF-Token'] = await getCsrfToken();
+  }
   try {
-    response = await fetch(url, {
-      ...options,
-      headers: { Accept: 'application/json', ...(options.headers ?? {}) }
-    });
+    response = await fetch(url, { ...options, headers });
   } catch {
     throw new ApiError(0, 'Tidak dapat terhubung ke server.');
   }
@@ -58,6 +69,7 @@ async function request(url, options = {}) {
 
   const payload = await response.json().catch(() => ({}));
   if (!response.ok) {
+    if (payload.error?.code === 'CSRF_INVALID') csrfToken = null;   // ambil ulang pada percobaan berikutnya
     throw new ApiError(
       response.status,
       payload.error?.message ?? `HTTP ${response.status}`,
