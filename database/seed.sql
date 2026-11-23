@@ -8,4 +8,4 @@ INSERT INTO alat (nama, kategori, jumlah, kondisi, lokasi) VALUES
 ('Switch 8 Port', 'Jaringan',    3,  'Perlu Cek', 'Lab Jaringan');
 
 INSERT INTO users (nama, email, password_hash, role) VALUES
-('Muhammad Rizal', 'rizal@example.com', 'GANTI_DENGAN_HASH_DARI_password_hash', 'admin');c  
+('Muhammad Rizal', 'rizal@example.com', 'GANTI_DENGAN_HASH_DARI_password_hash', 'admin');  
